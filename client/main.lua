@@ -30,10 +30,17 @@ local function SpawnNPC()
 end
 
 local function OpenShop()
-    local menuOptions = {}
+    local menuOptions = {
+        {
+            id = 'digital-den-header',
+            header = '💻 Digital Den Shop',
+            isMenuHeader = true,
+        }
+    }
     
-    for _, item in ipairs(Config.Items) do
+    for idx, item in ipairs(Config.Items) do
         table.insert(menuOptions, {
+            id = 'item-' .. idx,
             header = item.label,
             txt = item.description .. ' - $' .. item.price,
             params = {
@@ -48,6 +55,7 @@ local function OpenShop()
     end
     
     table.insert(menuOptions, {
+        id = 'close-shop',
         header = '❌ Close',
         txt = 'Close the shop',
         params = {
